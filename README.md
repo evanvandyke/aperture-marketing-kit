@@ -65,39 +65,66 @@ The other top-level folders in the Kit:
 
 ## Quick start
 
-```bash
-# 1. Install the skill packs (one-time, per machine)
-mkdir -p ~/.claude/skills
-git clone https://github.com/AgriciDaniel/claude-seo.git ~/.claude/skills/claude-seo
-git clone https://github.com/AgriciDaniel/claude-ads.git ~/.claude/skills/claude-ads
+### 1. Clone the Kit and set up your project folder
 
-# 2. Clone this Kit
+```bash
+# Clone this Kit
 git clone https://github.com/evanvandyke/aperture-marketing-kit.git
 
-# 3. Copy the project starter into a new folder for your business
-mkdir ~/my-seo-project
-cp -r aperture-marketing-kit/project-starter/. ~/my-seo-project/
-
-# 4. Initialize git in your new project
-cd ~/my-seo-project
+# Create a new project folder for your business
+mkdir ~/my-marketing-project
+cp -r aperture-marketing-kit/project-starter/. ~/my-marketing-project/
+cd ~/my-marketing-project
 git init
-
-# 5. Open in VS Code and start a Claude Code session
-code .
-# Then open a terminal in VS Code (View → Terminal) and run:
-claude
-
-# 6. In the Claude Code session, say:
-# "Read NOW.md, STRATEGY.md, and CONTEXT.md and tell me what's next."
 ```
 
-From there, Claude Code will walk you through filling out `CONTEXT.md` for your business. That's the most important step — the quality of everything you produce depends on the quality of that file.
+### 2. Open in VS Code and start Claude Code
 
-**First session shortcut.** If you can't figure out where to start with CONTEXT.md, say this in your Claude Code session:
+```bash
+code .
+```
 
-> "Fetch my homepage at [URL] and produce a first draft of CONTEXT.md based on what's already on the site. I'll refine it from there."
+Open the integrated terminal in VS Code (View → Terminal, or `` Cmd/Ctrl + ` ``) and run:
 
-That alone is probably the fastest onboarding you'll get.
+```bash
+claude
+```
+
+### 3. Ask Claude to install the skill packs
+
+This is where the Kit deviates from most install guides: you don't run the install commands yourself. You ask Claude to do it for you. Paste this exact message into the Claude Code session:
+
+```
+I want to install two open-source skill packs for this project. Install
+them at the project level (inside .claude/skills/ in this folder) so they
+only load for this project, not globally on my machine.
+
+Source repos:
+- https://github.com/AgriciDaniel/claude-seo
+- https://github.com/AgriciDaniel/claude-ads
+
+Each repo contains multiple skills under a skills/ directory and agents
+under an agents/ directory. Clone the repos, copy the contents of their
+skills/ folders into .claude/skills/ in this project, and copy their
+agents/ folders into .claude/agents/ in this project. When you're done,
+confirm by listing what /seo commands are now available.
+```
+
+Claude clones the repos, copies the files, and reports back with the full list of commands now available. If something goes wrong, Claude explains what and why — and you fix it by asking. This "use the machine to build the machine" pattern is the core move the Kit is built around.
+
+**Why project-scoped and not global?** Skills at the project level only load inside this specific folder. That keeps marketing tools isolated from any other Claude Code work on your machine, and makes your project self-contained. You can always install globally later if you want the skills everywhere.
+
+### 4. Start your first session
+
+Tell Claude to read the project files:
+
+> Read NOW.md, STRATEGY.md, and CONTEXT.md and tell me what's next.
+
+Claude walks you through filling out `CONTEXT.md` for your business. That's the most important step — the quality of everything you produce depends on the quality of that file.
+
+**First session shortcut.** If you don't know where to start with CONTEXT.md, say:
+
+> Fetch my homepage at [URL] and produce a first draft of CONTEXT.md based on what's already on the site. I'll refine it from there.
 
 ---
 

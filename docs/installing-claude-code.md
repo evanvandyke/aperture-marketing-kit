@@ -109,46 +109,89 @@ If you don't know what plan you have, go to [claude.com/settings/billing](https:
 
 ## Step 5: Install the SEO and ads skill packs
 
-These are the "slash commands" that unlock `/seo audit`, `/seo page`, `/ads google`, `/geo-optimization`, and dozens of other marketing workflows. Install once and they work forever across every project you start.
+The skill packs are two open-source repos maintained by [@AgriciDaniel](https://github.com/AgriciDaniel):
 
-**If you are on a Team or Enterprise plan:** Ask your admin to deploy these org-wide. Skip to Step 6 once they're installed.
+- **claude-seo** — unlocks `/seo audit`, `/seo page`, `/seo schema`, `/geo-optimization`, and many more
+- **claude-ads** — unlocks `/ads google`, `/ads meta`, `/ads linkedin`, `/ads tiktok`, and more
 
-**If you're installing them yourself:** Open a terminal and run these commands:
+The recommended install method is to **ask Claude Code to install them for you** at the project level. You don't need to learn any install commands or repo structures. You tell Claude what you want, and Claude figures out how. This is the core pattern of working with Claude Code, and it's worth practicing on step one.
+
+### Step 5a: Create a project folder (if you don't have one yet)
 
 ```bash
-# Create the skills directory if it doesn't exist
-mkdir -p ~/.claude/skills
-
-# Install the SEO skill pack
-git clone https://github.com/AgriciDaniel/claude-seo.git ~/.claude/skills/claude-seo
-
-# Install the ads skill pack
-git clone https://github.com/AgriciDaniel/claude-ads.git ~/.claude/skills/claude-ads
+mkdir ~/my-marketing-project
+cd ~/my-marketing-project
+git init
+code .
 ```
 
-On Windows, use the same commands in PowerShell or Git Bash.
-
----
-
-## Step 6: Test everything
-
-Make a new folder somewhere to use as a test project:
+VS Code opens on the new folder. Open the integrated terminal (View → Terminal) and run:
 
 ```bash
-mkdir ~/test-claude-code
-cd ~/test-claude-code
 claude
 ```
 
-In the Claude Code session, type:
+### Step 5b: Paste the install prompt
+
+Inside the Claude Code session, paste this exact message:
+
+```
+I want to install two open-source skill packs for this project. Install
+them at the project level (inside .claude/skills/ in this folder) so they
+only load for this project, not globally on my machine.
+
+Source repos:
+- https://github.com/AgriciDaniel/claude-seo
+- https://github.com/AgriciDaniel/claude-ads
+
+Each repo contains multiple skills under a skills/ directory and agents
+under an agents/ directory. Clone the repos, copy the contents of their
+skills/ folders into .claude/skills/ in this project, and copy their
+agents/ folders into .claude/agents/ in this project. When you're done,
+confirm by listing what /seo commands are now available.
+```
+
+Claude clones the repos, copies the files into `.claude/skills/` and `.claude/agents/` in your project, and reports back with the full list of commands now available. If something goes wrong — permission issue, network failure, anything — Claude will tell you what happened, and you ask it to fix the issue. You don't troubleshoot git commands yourself.
+
+### Why project-scoped and not global?
+
+Skills at the project level only load when Claude Code is running inside that specific folder. Three benefits:
+
+1. **Isolation** — marketing skills don't clutter other Claude Code sessions on your machine (engineering projects, side projects, etc.)
+2. **Self-contained** — anyone who clones your project folder gets the skills automatically
+3. **No admin conflicts** — if your IT admin deploys different skills globally, project-scoped skills still work
+
+### Team or Enterprise admins
+
+If your org is on a Team or Enterprise Claude plan, you can deploy skills organization-wide through managed settings. See [Anthropic's official skills docs](https://code.claude.com/docs/en/skills) for the admin workflow.
+
+### If you prefer global install
+
+Each AgriciDaniel repo also supports a global install via an `install.sh` script. See the individual repos at [github.com/AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo) and [github.com/AgriciDaniel/claude-ads](https://github.com/AgriciDaniel/claude-ads) for those instructions. Project-scoped is recommended for most users.
+
+---
+
+## Step 6: Verify the install
+
+You should still be in your project folder with Claude Code running. Type:
+
+```
+/seo
+```
+
+If autocomplete shows a list of SEO commands, the install succeeded. Try running a quick test:
 
 ```
 /seo audit https://example.com
 ```
 
-If Claude Code starts running an audit (you'll see it thinking, then producing output), congratulations — everything is installed correctly. You're ready to use the Aperture Marketing Kit.
+If Claude Code starts running an audit, everything is working correctly. You're ready to use the Aperture Marketing Kit.
 
-If you see "unknown command" or nothing happens, the skill pack didn't install correctly. See the troubleshooting guide at `docs/troubleshooting.md` in the Kit.
+If you see "unknown command" or autocomplete shows nothing, the skills didn't install correctly. Ask Claude to investigate:
+
+> The /seo commands aren't showing up. Can you check what's in .claude/skills/ in this project and tell me what went wrong?
+
+Claude will look at the files and usually figure out the issue on its own. See `docs/troubleshooting.md` for other common issues.
 
 ---
 
