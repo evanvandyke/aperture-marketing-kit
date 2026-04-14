@@ -29,18 +29,18 @@ It's not for complete beginners who have never opened a terminal. You'll need th
 
 ## What's inside (two parts)
 
-### Part 1: Skill packs (install once per machine)
+### Part 1: Skill packs
 
-Claude Code "skills" are specialized prompt packages that unlock slash commands like `/seo audit`, `/seo page`, `/ads google`, `/seo geo`. They install into your global `~/.claude/skills/` folder and work across every project on your machine.
-
-The Kit is built to work alongside these two open-source skill packs:
+Claude Code "skills" are specialized prompt packages that unlock slash commands like `/seo audit`, `/seo page`, `/ads google`, `/seo geo`. The Kit is built to work alongside two open-source skill packs:
 
 - **[claude-seo](https://github.com/AgriciDaniel/claude-seo)** by [@AgriciDaniel](https://github.com/AgriciDaniel) — the SEO command library. Site audits, technical SEO, schema, content quality, GEO, sitemap analysis, competitor pages, and more. Twenty-plus commands.
 - **[claude-ads](https://github.com/AgriciDaniel/claude-ads)** by [@AgriciDaniel](https://github.com/AgriciDaniel) — the paid advertising command library. Google, Meta, LinkedIn, TikTok, Microsoft. Full audits, creative review, budget allocation, tracking health checks.
 
-Both packs install in about two minutes apiece. We did not fork them — they're actively maintained, they work, and forking would mean carrying our own versions forever. This Kit is the project layer we run on top of them.
+We did not fork them — they're actively maintained, they work, and forking would mean carrying our own versions forever. This Kit is the project layer we run on top of them.
 
-> **Team or Enterprise plan users:** your admin can deploy these skill packs organization-wide, which saves every team member from installing manually. Worth checking before you clone anything.
+**How to install them:** the Kit recommends **project-scoped install via a prompt to Claude Code itself** (see Quick start below). Each skill pack lives inside the specific project folder at `.claude/skills/`, so marketing tools don't clutter other Claude Code sessions on your machine. You can still install them globally at `~/.claude/skills/` if you prefer — each AgriciDaniel repo supports both via its own `install.sh`.
+
+> **Team or Enterprise plan users:** your admin can also deploy these skill packs organization-wide through managed settings, which gives every team member access without individual installs. Worth checking with your admin before you clone anything.
 
 ### Part 2: Project starter (clone per project)
 
