@@ -1,0 +1,19 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local notes (personal drafts you don't want public)
+notes-private/
+DRAFT-*.md
+
+# Claude Code session logs
+.claude/logs/
+.claude/tmp/
